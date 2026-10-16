@@ -1,0 +1,62 @@
+{
+  "manifest_version": 3,
+  "name": "骗关者清除器 · A1terE&o",
+  "version": "1.3.2",
+  "description": "A1terE&o 出品：自动识别登录账号，在 X 列表轻量标注蓝标关系，关注与取关由你手动操作。",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "options_page": "app.html",
+  "action": {
+    "default_title": "骗关者清除器 · A1terE&o",
+    "default_popup": "app.html?popup=1",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "relationship-assistant.js",
+        "launcher.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "relationship-core.js",
+        "identity.js",
+        "icons/mark.svg"
+      ],
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; base-uri 'none'"
+  },
+  "author": "Venti yongst · A1terE&o",
+  "minimum_chrome_version": "127",
+  "optional_host_permissions": [
+    "https://api.github.com/*"
+  ]
+}
